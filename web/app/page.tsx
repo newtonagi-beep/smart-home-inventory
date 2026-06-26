@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Button, TextField, Label, Input, Text } from "@heroui/react";
+import { Card, Button, TextField, Label, Input } from "@heroui/react";
 
 export default function DashboardPage() {
   return (
@@ -15,7 +15,7 @@ export default function DashboardPage() {
         <TextField className="flex-1">
           <Label>Search</Label>
           <Input placeholder="Search items by name, description, or tag..." />
-          <Text slot="description">Find anything in your inventory</Text>
+          <p className="text-sm text-foreground/40">Find anything in your inventory</p>
         </TextField>
         <Button variant="primary">Search</Button>
       </div>
