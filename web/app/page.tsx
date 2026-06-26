@@ -26,30 +26,30 @@ export default function DashboardPage() {
           <Card.Header>
             <Card.Title>Containers</Card.Title>
           </Card.Header>
-          <Card.Body>
+          <Card.Content>
             <p className="text-3xl font-bold">12</p>
             <p className="text-sm text-foreground/60">active boxes</p>
-          </Card.Body>
+          </Card.Content>
         </Card>
 
         <Card>
           <Card.Header>
             <Card.Title>Items</Card.Title>
           </Card.Header>
-          <Card.Body>
+          <Card.Content>
             <p className="text-3xl font-bold">247</p>
             <p className="text-sm text-foreground/60">tracked items</p>
-          </Card.Body>
+          </Card.Content>
         </Card>
 
         <Card>
           <Card.Header>
             <Card.Title>Locations</Card.Title>
           </Card.Header>
-          <Card.Body>
+          <Card.Content>
             <p className="text-3xl font-bold">5</p>
             <p className="text-sm text-foreground/60">zones</p>
-          </Card.Body>
+          </Card.Content>
         </Card>
       </div>
 
@@ -59,9 +59,9 @@ export default function DashboardPage() {
           <Card.Title>Recent Items</Card.Title>
           <Card.Description>Last 10 items added</Card.Description>
         </Card.Header>
-        <Card.Body>
+        <Card.Content>
           <p className="text-foreground/40">Scan a QR code or add your first item to get started.</p>
-        </Card.Body>
+        </Card.Content>
       </Card>
     </div>
   );
