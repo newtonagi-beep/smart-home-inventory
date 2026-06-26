@@ -50,9 +50,9 @@ def hybrid_search(db: Session, query: str, w1: float = 0.3, w2: float = 0.7) -> 
     )
 
     # 2. Vector search (cosine similarity)
-    vector_expr = func.cos_dist(Item.description_embedding, query_vec)
+    vector_expr = Item.description_embedding.cosine_distance(query_vec).label("cos_dist")
     semantic = (
-        db.query(Item, vector_expr.label("cos_dist"))
+        db.query(Item, vector_expr)
         .filter(Item.description_embedding.isnot(None))
         .order_by(vector_expr)
         .limit(50)
