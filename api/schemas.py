@@ -41,7 +41,7 @@ class ItemCreate(BaseModel):
     name: str = Field(max_length=255)
     description: str | None = None
     images: list[str] | None = None
-    metadata: dict | None = None
+    extra_data: dict | None = None
     tags: list[str] | None = None
 
 

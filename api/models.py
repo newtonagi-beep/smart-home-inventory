@@ -58,7 +58,7 @@ class Item(Base):
     description = Column(Text, nullable=True)
     description_embedding = Column(Vector(384), nullable=True)
     images = Column(JSON, nullable=True)
-    metadata = Column(JSON, nullable=True)
+    extra_data = Column(JSON, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=text("NOW()"))
     updated_at = Column(DateTime(timezone=True), server_default=text("NOW()"), onupdate=text("NOW()"))
 

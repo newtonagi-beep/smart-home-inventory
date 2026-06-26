@@ -25,6 +25,21 @@ router = APIRouter(prefix="/api/v1")
 QR_PATTERN = re.compile(r"^shi://box/([a-f0-9\-]{36})$")
 
 
+def _serialize_item(item: Item) -> dict:
+    """Konwertuje Item + relację tags na słownik z tagami jako stringami."""
+    return {
+        "id": item.id,
+        "container_id": item.container_id,
+        "name": item.name,
+        "description": item.description,
+        "images": item.images,
+        "extra_data": item.extra_data,
+        "tags": [it.tag.name for it in item.tags] if item.tags else [],
+        "created_at": item.created_at,
+        "updated_at": item.updated_at,
+    }
+
+
 # ─── Locations ───────────────────────────────────────────────
 
 
@@ -86,7 +101,7 @@ def lookup_container(token: str = Query(...), db: Session = Depends(get_db)):
             description=c.description,
             location_id=c.location_id,
         ),
-        "items": items,
+        "items": [_serialize_item(i) for i in items],
     }
 
 
@@ -101,7 +116,7 @@ def list_containers(location_id: uuid.UUID | None = None, db: Session = Depends(
 # ─── Items ───────────────────────────────────────────────────
 
 
-@router.post("/items")
+@router.post("/items", response_model=ItemSchema)
 def create_item(body: ItemCreate, db: Session = Depends(get_db)):
     """Flow z pseudokodu: NLP → embedding → tagowanie."""
     from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
@@ -116,7 +131,7 @@ def create_item(body: ItemCreate, db: Session = Depends(get_db)):
         description=body.description,
         description_embedding=vector,
         images=body.images,
-        metadata=body.metadata,
+        extra_data=body.extra_data,
     )
     db.add(item)
     db.flush()
@@ -133,7 +148,7 @@ def create_item(body: ItemCreate, db: Session = Depends(get_db)):
 
     db.commit()
     db.refresh(item)
-    return item
+    return _serialize_item(item)
 
 
 @router.get("/items/search")
@@ -143,12 +158,12 @@ def search_items(q: str = Query(...), db: Session = Depends(get_db)):
     return results
 
 
-@router.get("/items/{item_id}")
+@router.get("/items/{item_id}", response_model=ItemSchema)
 def get_item(item_id: uuid.UUID, db: Session = Depends(get_db)):
     item = db.get(Item, item_id)
     if not item:
         raise HTTPException(404, "Item not found")
-    return item
+    return _serialize_item(item)
 
 
 @router.patch("/items/{item_id}/move")
