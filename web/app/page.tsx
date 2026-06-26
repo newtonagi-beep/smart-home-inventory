@@ -14,7 +14,8 @@ export default function DashboardPage() {
       <div className="mb-8 flex gap-3">
         <TextField
           className="flex-1"
-          placeholder="Search items by name, description, or tag..."
+          label="Search"
+          description="Search items by name, description, or tag..."
           aria-label="Search items"
         />
         <Button variant="primary">Search</Button>
