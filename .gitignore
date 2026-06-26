@@ -1,0 +1,13 @@
+node_modules/
+.next/
+.env
+.env.local
+dist/
+build/
+*.pyc
+__pycache__/
+.venv/
+*.egg-info/
+.DS_Store
+*.log
+.heroui-docs/

@@ -1,0 +1,14 @@
+{
+  "name": "smart-home-inventory",
+  "private": true,
+  "scripts": {
+    "web:dev": "cd web && npm run dev",
+    "web:build": "cd web && npm run build",
+    "api:dev": "cd api && uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+    "db:up": "docker compose up -d db",
+    "dev": "concurrently \"npm run api:dev\" \"npm run web:dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.3"
+  }
+}

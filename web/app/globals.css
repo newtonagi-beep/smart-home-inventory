@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+/* HeroUI v3 — Tailwind CSS v4, oklch colors */
+
+:root {
+  --background: oklch(0.9702 0 0);
+  --foreground: oklch(0.1 0.1 220);
+}
+
+.dark {
+  --background: oklch(0.1 0.1 220);
+  --foreground: oklch(0.9702 0 0);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", system-ui, sans-serif;
+}
