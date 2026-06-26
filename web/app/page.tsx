@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, TextField, Button } from "@heroui/react";
+import { Card, Button, TextField, Label, Input, Text } from "@heroui/react";
 
 export default function DashboardPage() {
   return (
@@ -10,14 +10,13 @@ export default function DashboardPage() {
         <p className="text-foreground/60">Your home, organized.</p>
       </div>
 
-      {/* Search bar */}
-      <div className="mb-8 flex gap-3">
-        <TextField
-          className="flex-1"
-          label="Search"
-          description="Search items by name, description, or tag..."
-          aria-label="Search items"
-        />
+      {/* Search bar — HeroUI v3 compound pattern */}
+      <div className="mb-8 flex gap-3 items-end">
+        <TextField className="flex-1">
+          <Label>Search</Label>
+          <Input placeholder="Search items by name, description, or tag..." />
+          <Text slot="description">Find anything in your inventory</Text>
+        </TextField>
         <Button variant="primary">Search</Button>
       </div>
 
@@ -60,7 +59,9 @@ export default function DashboardPage() {
           <Card.Title>Recent Items</Card.Title>
           <Card.Description>Last 10 items added</Card.Description>
         </Card.Header>
-        <Card.Body>{/* Item list here */}</Card.Body>
+        <Card.Body>
+          <p className="text-foreground/40">Scan a QR code or add your first item to get started.</p>
+        </Card.Body>
       </Card>
     </div>
   );
